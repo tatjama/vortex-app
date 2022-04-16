@@ -1,5 +1,4 @@
 .nav{
-    background-color: blue;
     height: 90%;
     padding: 3.5vw;
     display: flex;
@@ -12,18 +11,19 @@
 }
 .navigation li{
     list-style: none;
+    position: relative;    
 }
 
 .navigation a {
     text-decoration: none;
     color: rgb(187, 188, 243);
-    background-color: green;
     width: 7vw;
     height: 7vw;
     margin-right: 2vw;
     line-height: 7vw;
     text-align: center;
     font-size: 2rem;
+    font-weight: bold;
     display: inline-block;
     border-radius:50%;
     -webkit-border-radius:50%;
@@ -39,10 +39,26 @@
     display: inline-block;
     margin: 10px;
 }
-
+.span{
+    position: absolute;
+    bottom: -6vw;
+    left: 8vw;
+    font-size: large;
+    display: block;
+    width: 16vw;
+    /*position: absolute;
+    bottom: -20px;
+    left: 13vw;
+    text-align: center;*/
+}
+.navigation li:first-child .span{
+    left: -4.5vw;
+}
+.active.span{
+    color: green;
+}
 @media screen and (max-width: 1000px){
     .navigation a{
-        background-color: orange;
         width: 11vw;
         height: 11vw;
         line-height: 11vw;
@@ -59,10 +75,9 @@
 
 @media screen and (max-width:500px) { 
     .navigation a{
-        background-color: black;
-        width: 16vw;
-        height: 16vw;
-        line-height: 16vw;
+        width: 15vw;
+        height: 15vw;
+        line-height: 15vw;
     }
     .navigation li:not(:first-child)::before{
         width: 0px;
