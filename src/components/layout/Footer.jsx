@@ -1,9 +1,13 @@
+import Button from '../button/Button';
+import Chevron from '../chevron/Chevron';
 import classes from './Footer.module.css';
 
-const Footer = () => {
+const Footer = () => {    
+
     return (
         <footer className={classes.footer}>
-            Footer
+            <Button styleDescription = {classes.btn} text = "Back"><Chevron/> </Button>
+            <Button styleDescription = {classes.btn_active} text = "Next"/>
         </footer>
     )
 }
