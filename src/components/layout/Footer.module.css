@@ -1,6 +1,11 @@
 .footer{
-    height: 200px;
+    height: 170px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+@media screen and (max-width:800px) {
+    .footer{
+        height: 120px;
+    }
 }

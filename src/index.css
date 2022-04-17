@@ -15,11 +15,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 button{
-  padding: 20px;
+  padding: 20px 10px;
   margin: 20px 1.5%;
   width: 22%;
   font-size: 1.6rem;
   line-height: 1.6rem;
+  letter-spacing: -1px;
   font-weight: bold;
   cursor: pointer;
   background-color: transparent;
@@ -40,9 +41,17 @@ i{
 .btn{
   color: rgb(86, 87, 128);
 }
+.btn:hover{
+  background-color: rgb(222, 222, 238);
+}
 .btn_active{
   color: rgb(187, 188, 243);
   background-color:rgb(54, 54, 85);
+  border: 3px solid rgb(54, 54, 85);  
+}
+.btn_active:hover{
+  background-color: black;
+  color: white;
 }
 .active span{
   color: rgb(54, 54, 85);
@@ -50,6 +59,35 @@ i{
 h2{
   color: rgb(54, 54, 85);
 }
+
+form{
+  color: rgb(189, 182, 202);
+}
+
+input{
+  height: 80px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(54, 54, 85);  
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  outline: none;
+  border: 4px solid rgb(189, 182, 202);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+input::placeholder{
+  font-weight: bold;
+  letter-spacing: -2px;
+  opacity: 0.4;
+  color:rgb(189, 182, 202);
+}
+input[type="text"]{
+  width: 100%;
+}  
 
 @media screen and (max-width: 800px) {
    button{
@@ -65,7 +103,20 @@ h2{
 @media screen and (max-width: 500px) {
   button{
     width: 47%;
-    font-size: 1.1rem;
+    padding: 12px 10px;
+    margin: 10px 1.5%;
+  }
+  input{
+    height: 50px;
+    font-size: 1.3rem;  
+    padding: 7px 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 3px solid rgb(189, 182, 202);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
   }
 }
 
