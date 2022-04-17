@@ -16,11 +16,11 @@ body {
 }
 button{
   padding: 20px;
-  margin: 20px;
-  width: 15vw;
+  margin: 20px 1.5%;
+  width: 22%;
   font-size: 1.6rem;
+  line-height: 1.6rem;
   font-weight: bold;
-
   cursor: pointer;
   background-color: transparent;
   color:rgb(86, 87, 128);
@@ -37,28 +37,25 @@ i{
   margin-right: 1rem;
 }
 
+.btn{
+  color: rgb(86, 87, 128);
+}
+.btn_active{
+  color: rgb(187, 188, 243);
+  background-color:rgb(54, 54, 85);
+}
 .active span{
   color: rgb(54, 54, 85);
 }
 h2{
   color: rgb(54, 54, 85);
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
-@media screen and (max-width: 1000px) {
-  button{
-      font-size: 1rem;
-      width: 19vw;
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
    button{
-      font-size: 0.8rem;
-      padding: 15px 20px;
+      width: 30%;
+      font-size: 1.3rem;
+      line-height: 1.3rem;
   }
   i{
       margin-right:0.2rem;
@@ -66,14 +63,9 @@ code {
 }
 
 @media screen and (max-width: 500px) {
-  .footer button{
-      width: 25vw;
-      font-size: 0.65rem;
-      padding: 15px 20px ;
-      margin: 10px;
-  }
-  .footer button i{
-      margin-right:0.2rem;
+  button{
+    width: 47%;
+    font-size: 1.1rem;
   }
 }
 

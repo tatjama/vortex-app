@@ -42,21 +42,16 @@
 .span{
     position: absolute;
     bottom: -6vw;
-    left: 8vw;
-    font-size: large;
+    left: 7vw;
+    font-size: medium;
     display: block;
-    width: 16vw;
-    /*position: absolute;
-    bottom: -20px;
-    left: 13vw;
-    text-align: center;*/
+    width: 17vw;
+    letter-spacing: -0.5px;
 }
 .navigation li:first-child .span{
-    left: -4.5vw;
+    left: -5vw;
 }
-.active.span{
-    color: green;
-}
+
 @media screen and (max-width: 1000px){
     .navigation a{
         width: 11vw;
@@ -70,6 +65,15 @@
         border-top: 3px solid rgb(189, 182, 202);
         display: inline-block;
         margin: 8px;
+    }
+    .span{
+        bottom: -9vw;
+        left: 0.5vw;
+        width: 27vw;
+        font-size: small;
+    }
+    .navigation li:first-child .span{
+        left: -8.5vw;
     }      
 }
 
@@ -82,5 +86,8 @@
     .navigation li:not(:first-child)::before{
         width: 0px;
         margin: 4px;
+    }
+    .span{
+        display: none;
     }
 }

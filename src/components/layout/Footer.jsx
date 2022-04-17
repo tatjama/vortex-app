@@ -6,8 +6,8 @@ const Footer = () => {
 
     return (
         <footer className={classes.footer}>
-            <Button styleDescription = {classes.btn} text = "Back"><Chevron/> </Button>
-            <Button styleDescription = {classes.btn_active} text = "Next"/>
+            <Button styleDescription = "btn" text = "Back"><Chevron/> </Button>
+            <Button styleDescription = "btn_active" text = "Next"/>
         </footer>
     )
 }

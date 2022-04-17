@@ -1,7 +1,10 @@
 .container {
     margin: 3rem auto;
     width: 90vw;
-    height: 85vh;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
     border: 3px solid rgb(189, 182, 202);
     border-radius:10px;
@@ -13,7 +16,10 @@
 
 .main{
     background-color: yellow;
-    height: 30vh;
+    height: 100%;
+}
+.main button{
+    padding: 30px;
 }
 
 @media screen and (max-width:1000px) {
@@ -22,4 +28,9 @@
         width: 95%;
     }
     
+}
+@media screen and (max-width:800px) {
+    .main button{
+        padding: 25px;
+    }
 }
