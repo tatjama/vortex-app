@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
 
+import { maxDate } from '../../util/helper';
 import classes from './Information.module.css';
 
 const Information = () => {
@@ -22,8 +24,7 @@ const Information = () => {
     const [ language, setLanguage ] = useState('');
     const [ description, setDescription ] = useState('');    
 
-    const maxDate = new Date().toLocaleDateString('en').split('/');
-    const max = maxDate[2] + '-' + maxDate[0].padStart(2, '0') + '-' + maxDate[1].padStart(2, '0');
+    const history = useHistory();
     
     const handleSelectAuthor = (e) => {
         setAuthor(e.target.value);       
@@ -89,6 +90,7 @@ const Information = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        /**check if validation */
         const book = {
             title: title,
             author: author, 
@@ -102,6 +104,12 @@ const Information = () => {
             description: description       
         }
         console.log(book);
+        history.push('/success');
+    }
+
+    const handleBackClick = (e) => {
+        e.preventDefault();
+        history.push('/subgenre');
     }
 
     return (
@@ -111,6 +119,7 @@ const Information = () => {
 
                 
         <form onSubmit = {handleSubmit}>
+            <fieldset>
             <label htmlFor="title">Book title</label>
             <input 
                 type="text" 
@@ -181,7 +190,7 @@ const Information = () => {
                 placeholder="dd-mm-yyyy" 
                 value={published}
                 format="dd-MM-yyyy"                
-                max={max}
+                max={maxDate()}
                 onClick={(e) => {setPublisher('')}}
                 onFocus={(e) => {setPublisher('')}}
                 onChange = {handlePublished}                
@@ -267,8 +276,8 @@ const Information = () => {
                 onChange = {handleDescription}
             >
             </textarea>
-            <button type = 'submit' onSubmit = {handleSubmit}>Submit</button>   
-        <Footer/>
+        </fieldset>
+        <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
         </form>
         </Main>
         </>

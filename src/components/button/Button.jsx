@@ -4,7 +4,7 @@ const Button = (props) => {
     return(
         <button 
             className={props.styleDescription} 
-            onClick = {props.handleChooseGenre}
+            onClick = {props.clickHandler}
             id = {props.id}
             >
                 {props.children}{props.text}

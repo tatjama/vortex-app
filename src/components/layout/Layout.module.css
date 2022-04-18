@@ -1,5 +1,5 @@
 .container {
-    margin: 3rem auto;
+    margin: 2rem auto;
     width: 90vw;
     min-height: 85vh;
     display: flex;
@@ -22,6 +22,6 @@
 @media screen and (max-width:500px) {
     .container{
         margin: 1.5rem auto;
-        min-height: 630px;
+        min-height: 650px;
     }    
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -7,32 +8,56 @@ import classes from './AddSubgenre.module.css';
 
 const AddSubgenre = () => {
 
-    const [ subgenreName, setSubgenreName ] = useState('');
-    const [ isDescription, setIsDescription ] = useState(false);
+    const [ name, setName ] = useState('');
+    const [ isDescriptionRequired, setIsDescriptionRequired ] = useState(false);
 
-    /*const handleChange = (event) => {
-        console.log(event.target.value);
-        setSubgenreName(event.target.value);
-    }*/
+    const history = useHistory();
+
+    const handleBackClick = (e) => {
+        e.preventDefault();
+        /**close page 3 */
+        history.push('/subgenre');
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(name !== ''){
+            const subgenre = {
+                name: name,
+                isDescriptionRequired: isDescriptionRequired
+            }
+            console.log(subgenre);
+            /**add new subgenre in subgenreList */
+            /**close page 3 */
+            history.push('/information');
+        }
+        
+    }
  
     return (
         <>
         <Header/>
             <Main>
-                <form className={classes.form}>            
-                    <input 
-                        type = "text" 
-                        placeholder = "Subgenre name" 
-                        name = "subgenreName" 
-                        value = {subgenreName} 
-                        onChange={(e) => {setSubgenreName(e.target.value)}}
-                    />            
-                    <label className={classes.checkbox_container}>
-                        Description is required for this subgenre
-                        <input type = "checkbox" checked = {isDescription} onChange = {() => setIsDescription(!isDescription)}/>
-                        <span className={classes.checkmark}></span>
-                    </label>
-                    <Footer/>            
+                <form onSubmit={handleSubmit} className={classes.form}>  
+                    <fieldset>          
+                        <input 
+                            type = "text" 
+                            placeholder = "Subgenre name" 
+                            name = "subgenreName" 
+                            value = {name} 
+                            onChange={(e) => {setName(e.target.value)}}
+                            required = {true}
+                        />            
+                        <label className={classes.checkbox_container}>
+                            Description is required for this subgenre
+                            <input 
+                                type = "checkbox" 
+                                checked = {isDescriptionRequired} 
+                                onChange = {() => setIsDescriptionRequired(!isDescriptionRequired)}/>
+                            <span className={classes.checkmark}></span>
+                        </label>
+                    </fieldset>
+                    <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text="Next"/>            
                 </form>
             </Main>
         </>
