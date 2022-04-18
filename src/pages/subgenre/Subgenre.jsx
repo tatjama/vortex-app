@@ -1,15 +1,14 @@
 import { useState } from 'react';
-//import classes from './Genre.module.css'; 
-
+import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
+import Footer from '../../components/layout/Footer';
 import Button from '../../components/button/Button';
 
 const Subgenre = () => {
 
-    const [styleDescription, setStyleDescription] = useState('btn');
     const [activeButton, setActiveButton] = useState(null);
     const handleChooseGenre = (id) => {
         console.log('clicked' + id)
-        //setStyleDescription('btn_active');
         setActiveButton(id);
     }
 
@@ -18,17 +17,19 @@ const Subgenre = () => {
 
     return(
         <>
-            {
-                arrayOfButtons.map((button, index) => {
-                    return <Button 
+            <Header/>
+                <Main>
+                    {
+                        arrayOfButtons.map((button, index) => {
+                            return <Button 
                                 styleDescription = { (activeButton === index)? 'btn_active': "btn"} 
                                 handleChooseGenre = {() => handleChooseGenre(index)} 
                                 text = {button}
                                 id = {index}
                                 key = {index}
                             />
-                })
-            }
+                        })
+                    }
                             <Button 
                                 styleDescription = { (activeButton === "addNew")? 'btn_active': "btn"} 
                                 handleChooseGenre = {() => handleChooseGenre("addNew")} 
@@ -36,6 +37,8 @@ const Subgenre = () => {
                                 id = "addNew"
                                 key = "addNew"
                             />
+                    <Footer/>
+                </Main>            
         </>
     )
 }

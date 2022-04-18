@@ -4,8 +4,25 @@
     align-items: center;
     justify-content: flex-end;
 }
+.footer button{
+    padding: 20px 10px;
+  
+}
 @media screen and (max-width:800px) {
     .footer{
         height: 120px;
+    }
+    .footer button{
+        width: 30%;
+        font-size: 1.3rem;
+        line-height: 1.3rem;        
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer button{
+      width: 47%;
+      padding: 12px 10px;
+      margin: 10px 1.5%;
     }
 }

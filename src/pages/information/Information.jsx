@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import Chevron from '../../components/chevron/Chevron';
+import { useState } from 'react';
+import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
+import Footer from '../../components/layout/Footer';
 
 import classes from './Information.module.css';
 
@@ -103,6 +105,11 @@ const Information = () => {
     }
 
     return (
+        <>
+            <Header/>
+                <Main>
+
+                
         <form onSubmit = {handleSubmit}>
             <label htmlFor="title">Book title</label>
             <input 
@@ -261,16 +268,15 @@ const Information = () => {
             >
             </textarea>
             <button type = 'submit' onSubmit = {handleSubmit}>Submit</button>   
+        <Footer/>
         </form>
+        </Main>
+        </>
     )
 }
 
 export default Information
 
-/*<div className={classes.checkbox_container}>
-                <input type = "checkbox"/>
-                <span className={classes.span}>Description is required for this subgenre</span>
-            </div>*/
 
 /**ISBN:
  * EAN prefix 978 ili 979

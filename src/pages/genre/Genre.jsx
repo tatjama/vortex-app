@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import classes from './Genre.module.css'; 
+import Header from '../../components/layout/Header';
+import Main from '../../components/layout/Main';
+import Footer from '../../components/layout/Footer';
 
 import Button from '../../components/button/Button';
 
 const Genre = () => {
 
-    const [styleDescription, setStyleDescription] = useState('btn');
     const [activeButton, setActiveButton] = useState(null);
     const handleChooseGenre = (id) => {
         console.log('clicked' + id)
-        //setStyleDescription('btn_active');
         setActiveButton(id);
     }
 
@@ -18,19 +18,23 @@ const Genre = () => {
 
     return(
         <>
-            {
-                arrayOfButtons.map((button, index) => {
-                    return <Button 
-                                styleDescription = { (activeButton === index)? 'btn_active': "btn"} 
-                                handleChooseGenre = {() => handleChooseGenre(index)} 
-                                text = {button}
-                                id = {index}
-                                key = {index}
-                            />
-                })
-            }
+            <Header/>
+                <Main>
+                    {
+                        arrayOfButtons.map((button, index) => {
+                        return <Button 
+                                    styleDescription = { (activeButton === index)? 'btn_active': "btn"} 
+                                    handleChooseGenre = {() => handleChooseGenre(index)} 
+                                    text = {button}
+                                    id = {index}
+                                    key = {index}
+                                />
+                        })
+                    }
+                    <Footer/>               
+                </Main>
         </>
     )
 }
 
-export default Genre
+export default Genre;
