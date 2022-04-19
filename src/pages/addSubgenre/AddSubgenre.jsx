@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
-
+import InputField from '../../components/form/input/InputField';
 import classes from './AddSubgenre.module.css';
 
 const AddSubgenre = () => {
@@ -40,19 +40,18 @@ const AddSubgenre = () => {
             <Main>
                 <form onSubmit={handleSubmit} className={classes.form}>  
                     <fieldset>          
-                        <input 
-                            type = "text" 
-                            placeholder = "Subgenre name" 
-                            name = "subgenreName" 
-                            value = {name} 
-                            onChange={(e) => {setName(e.target.value)}}
-                            required = {true}
-                        />            
+                    <InputField
+                        title = 'Subgenre name'
+                        type = 'text'
+                        name = 'subgenreName'
+                        value = {name}
+                        onChange = {(e) => {setName(e.target.value)}}
+                    />            
                         <label className={classes.checkbox_container}>
                             Description is required for this subgenre
-                            <input 
+                            <InputField 
                                 type = "checkbox" 
-                                checked = {isDescriptionRequired} 
+                                value = {isDescriptionRequired} 
                                 onChange = {() => setIsDescriptionRequired(!isDescriptionRequired)}/>
                             <span className={classes.checkmark}></span>
                         </label>
