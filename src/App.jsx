@@ -5,10 +5,8 @@ import  Subgenre  from './pages/subgenre/Subgenre';
 import  AddSubgenre  from './pages/addSubgenre/AddSubgenre';
 import  Information  from './pages/information/Information';
 import Success from './pages/success/Success';
-import { DUMMY_DATA } from './util/data';
 
 function App() {
- console.log(DUMMY_DATA)
   return (
     <Layout>
       <Switch>

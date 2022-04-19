@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -29,7 +30,10 @@ const Information = () => {
     const [ description, setDescription ] = useState('');    
 
     const history = useHistory();
-        
+    const genreCtx = useContext(GenreContext);
+    const selectedSubgenre = genreCtx.selectedSubgenre;
+    const selectedGenre = genreCtx.selectedGenre;  
+
     const addNewAuthor = () => {        
         if(author !== '' && authors.indexOf(author) === -1){
             const newAuthors = [...authors, author];
@@ -62,6 +66,8 @@ const Information = () => {
         e.preventDefault();
         /**check if empty fields validation */
         const book = {
+            genre: selectedGenre.name,
+            subgenre: selectedSubgenre.name,
             title: title,
             author: author, 
             isbn: isbn,
@@ -71,7 +77,8 @@ const Information = () => {
             format: format,
             edition: edition,
             language: language,
-            description: description       
+            description: description,
+            descriptionIsRequired: selectedSubgenre.isDescriptionRequired       
         }
         console.log(book);
         history.push('/success');
@@ -85,116 +92,113 @@ const Information = () => {
     return (
         <>
             <Header/>
-                <Main>
-
-                
-        <Form>
-                <Input
-                    title = 'Book title'
-                    type = 'text'
-                    name = 'title'
-                    value = {title}
-                    onChange = {(e) => {setTitle(e.target.value)}}
-                />
-                <DataList
-                    title = 'Author'
-                    type = 'input'
-                    name = 'author'
-                    list = 'authors'
-                    value = {author}
-                    arr = {authors}
-                    onChange = {(e) => {setAuthor(e.target.value)}}
-                    onClick={() => {setAuthor('')}}
-                    onFocus={() => {setAuthor('')}}
-                    onBlur = {addNewAuthor}
-                />
-                <Input
-                    title = 'ISBN'
-                    type = 'text'
-                    name = 'isbn'
-                    value = {isbn}
-                    onChange = {(e) => {setIsbn(e.target.value)}}
-                />
-                <DataList
-                    title = 'Publisher'
-                    type = 'input'
-                    name = 'publisher'
-                    list = 'publishers'
-                    value = {publisher}
-                    arr = {publishers}
-                    onChange = {(e) => {setPublisher(e.target.value)}}
-                    onClick={() => {setPublisher('')}}
-                    onFocus={() => {setPublisher('')}}
-                    onBlur = {addNewPublisher}
-                />  
-                <Input
-                    title="Date published"
-                    type="date"
-                    id="published"
-                    name="published"
-                    value={published}
-                    max={maxDate()}
-                    onChange = {(e) => setPublished(e.target.value)} 
-                />
-                <Input
-                    title = 'Number of pages'
-                    type = 'number'
-                    name = 'pagesNumber'
-                    min = '1'
-                    value = {pagesNumber}
-                    onChange = {(e) => {setPagesNumber(e.target.value)}}
-                />
-                <DataList
-                    title = 'Format'
-                    type = 'input'
-                    name = 'format'
-                    list = 'formats'
-                    value = {format}
-                    arr = {formats}
-                    onChange = {(e) => {setFormat(e.target.value)}}
-                    onClick={() => {setFormat('')}}
-                    onFocus={() => {setFormat('')}}
-                    onBlur = {addNewFormat}
-                />    
-                <div className={classes.edition_container}>
-                    <div>
+                <Main>                
+                    <Form>
                         <Input
-                            title = 'Edition'
-                            type = 'number'
-                            name = 'edition'
-                            min = '1'
-                            value = {edition}
-                            onChange = {(e) => {setEdition(e.target.value)}}
+                            title = 'Book title'
+                            type = 'text'
+                            name = 'title'
+                            value = {title}
+                            onChange = {(e) => {setTitle(e.target.value)}}
                         />
-                   
-                    </div>
-                    <div>
                         <DataList
-                            title = 'Language'
+                            title = 'Author'
                             type = 'input'
-                            name = 'language'
-                            list = 'languages'
-                            value = {language}
-                            arr = {languages}
-                            onChange = {(e) => {setLanguage(e.target.value)}}
-                            onClick={() => {setLanguage('')}}
-                            onFocus={() => {setLanguage('')}}
-                            onBlur = {addNewLanguage}
-                        />                                      
-                    </div>    
-                </div> 
-                <Textarea
-                    name="description"
-                    title="Description"
-                    placeholder="Type the description..."
-                    rows = '3'
-                    value = {description}
-                    onChange = {(e) => setDescription(e.target.value)}
-                />
-            </Form>
-            <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
+                            name = 'author'
+                            list = 'authors'
+                            value = {author}
+                            arr = {authors}
+                            onChange = {(e) => {setAuthor(e.target.value)}}
+                            onClick={() => {setAuthor('')}}
+                            onFocus={() => {setAuthor('')}}
+                            onBlur = {addNewAuthor}
+                        />
+                        <Input
+                            title = 'ISBN'
+                            type = 'text'
+                            name = 'isbn'
+                            value = {isbn}
+                            onChange = {(e) => {setIsbn(e.target.value)}}
+                        />
+                        <DataList
+                            title = 'Publisher'
+                            type = 'input'
+                            name = 'publisher'
+                            list = 'publishers'
+                            value = {publisher}
+                            arr = {publishers}
+                            onChange = {(e) => {setPublisher(e.target.value)}}
+                            onClick={() => {setPublisher('')}}
+                            onFocus={() => {setPublisher('')}}
+                            onBlur = {addNewPublisher}
+                        />  
+                        <Input
+                            title="Date published"
+                            type="date"
+                            id="published"
+                            name="published"
+                            value={published}
+                            max={maxDate()}
+                            onChange = {(e) => setPublished(e.target.value)} 
+                        />
+                        <Input
+                            title = 'Number of pages'
+                            type = 'number'
+                            name = 'pagesNumber'
+                            min = '1'
+                            value = {pagesNumber}
+                            onChange = {(e) => {setPagesNumber(e.target.value)}}
+                        />
+                        <DataList
+                            title = 'Format'
+                            type = 'input'
+                            name = 'format'
+                            list = 'formats'
+                            value = {format}
+                            arr = {formats}
+                            onChange = {(e) => {setFormat(e.target.value)}}
+                            onClick={() => {setFormat('')}}
+                            onFocus={() => {setFormat('')}}
+                            onBlur = {addNewFormat}
+                        />    
+                        <div className={classes.edition_container}>
+                            <div>
+                                <Input
+                                    title = 'Edition'
+                                    type = 'number'
+                                    name = 'edition'
+                                    min = '1'
+                                    value = {edition}
+                                    onChange = {(e) => {setEdition(e.target.value)}}
+                                />                   
+                            </div>
+                            <div>
+                                <DataList
+                                    title = 'Language'
+                                    type = 'input'
+                                    name = 'language'
+                                    list = 'languages'
+                                    value = {language}
+                                    arr = {languages}
+                                    onChange = {(e) => {setLanguage(e.target.value)}}
+                                    onClick={() => {setLanguage('')}}
+                                    onFocus={() => {setLanguage('')}}
+                                    onBlur = {addNewLanguage}
+                                />                                      
+                            </div>    
+                        </div> 
+                        <Textarea
+                            name="description"
+                            title="Description"
+                            placeholder="Type the description..."
+                            rows = '3'
+                            value = {description}
+                            onChange = {(e) => setDescription(e.target.value)}
+                        />
+                    </Form>
+                    <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
         
-        </Main>
+                </Main>
         </>
     )
 }

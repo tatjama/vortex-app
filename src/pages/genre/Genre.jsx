@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -12,32 +13,34 @@ const Genre = () => {
     const [ genre, setGenre ] = useState(null);
 
     const history = useHistory();
-
+    const genreCtx = useContext(GenreContext);
+    const genres = genreCtx.genreList;
+    
     const handleChooseGenre = (id) => {
-        console.log('clicked' + id)
         setActiveButton(id);
-        setGenre(genres[id]);
+        const chosenGenre =  genres.filter(item => item.id === id);
+        setGenre(chosenGenre[0]);
     }
 
     const handleClick = () => {
-        genre && history.push('/subgenre');
+        if(genre){
+            genreCtx.selectGenre(genre);
+            history.push('/subgenre');
+        } 
     }
 
-    const genres = ['Genre 1', 'Genre 2', 'Genre 3', 'Genre 4', 'Genre 5', 'Genre 6', 
-    'Genre 7', 'Genre 8',]
-    
     return(
         <>
             <Header/>
                 <Main>
                     {
-                        genres.map((button, index) => {
+                        genres.map((genre) => {
                         return <Button 
-                                    styleDescription = { (activeButton === index)? 'btn_active': "btn"} 
-                                    clickHandler = {() => handleChooseGenre(index)} 
-                                    text = {button}
-                                    id = {index}
-                                    key = {index}
+                                    styleDescription = { (activeButton === genre.id)? 'btn_active': "btn"} 
+                                    clickHandler = {() => handleChooseGenre(genre.id)} 
+                                    text = {genre.name}
+                                    id = {genre.id}
+                                    key = {genre.id}
                                 />
                         })
                     }

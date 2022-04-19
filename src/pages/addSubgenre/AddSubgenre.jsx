@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -13,6 +14,7 @@ const AddSubgenre = () => {
     const [ isDescriptionRequired, setIsDescriptionRequired ] = useState(false);
 
     const history = useHistory();
+    const genreCtx = useContext(GenreContext);
 
     const handleBackClick = (e) => {
         e.preventDefault();
@@ -27,8 +29,8 @@ const AddSubgenre = () => {
                 name: name,
                 isDescriptionRequired: isDescriptionRequired
             }
-            console.log(subgenre);
-            /**add new subgenre in subgenreList */
+            genreCtx.addSubgenre(subgenre);
+            genreCtx.selectSubgenre(subgenre);
             /**close page 3 */
             history.push('/information');
         }
@@ -56,8 +58,7 @@ const AddSubgenre = () => {
                             <span className={classes.checkmark}></span>
                         </label>
                     </Form>
-                    <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text="Next"/>            
-                
+                    <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text="Next"/>               
             </Main>
         </>
     )

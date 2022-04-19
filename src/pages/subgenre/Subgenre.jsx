@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -11,19 +12,23 @@ const Subgenre = () => {
     const [ subgenre, setSubgenre ] = useState(null);
 
     const history = useHistory();
+    
+    const genreCtx = useContext(GenreContext);
+    const subgenres = genreCtx.subgenreList;
 
-    const handleChooseGenre = (id) => {
-        console.log('clicked' + id)
+    const handleChooseSubgenre = (id) => {
         setActiveButton(id);
         if(id === 'addNew'){
             /**open page 3 */
         }else{
-            setSubgenre(subgenres[id])
+            const chosenSubgenre = subgenres.filter(item => item.id === id); 
+            setSubgenre(chosenSubgenre[0]);
         }
     }
 
     const handleClick = () => {
         if(subgenre){
+            genreCtx.selectSubgenre(subgenre);
             history.push('/information');
         }else{
             if(activeButton === 'addNew'){
@@ -35,28 +40,25 @@ const Subgenre = () => {
     const handleBackClick = () => {
         history.push('/');
     }
-
-    const subgenres = ['Subgenre 1', 'Subgenre 2', 'Subgenre 3', 'Subgenre 4', 'Subgenre 5', 'Subgenre 6', 
-    'Subgenre 7', ]
-
+    
     return(
         <>
             <Header/>
                 <Main>
                     {
-                        subgenres.map((button, index) => {
+                        subgenres.map((subgenre) => {
                             return <Button 
-                                styleDescription = { (activeButton === index)? 'btn_active': "btn"} 
-                                clickHandler = {() => handleChooseGenre(index)} 
-                                text = {button}
-                                id = {index}
-                                key = {index}
+                                styleDescription = { (activeButton === subgenre.id)? 'btn_active': "btn"} 
+                                clickHandler = {() => handleChooseSubgenre(subgenre.id)} 
+                                text = {subgenre.name}
+                                id = {subgenre.id}
+                                key = {subgenre.id}
                             />
                         })
                     }
                             <Button 
                                 styleDescription = { (activeButton === "addNew")? 'btn_active': "btn"} 
-                                clickHandler = {() => handleChooseGenre("addNew")} 
+                                clickHandler = {() => handleChooseSubgenre("addNew")} 
                                 text = "Add new"
                                 id = "addNew"
                                 key = "addNew"
