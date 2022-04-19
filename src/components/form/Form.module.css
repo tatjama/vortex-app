@@ -1,0 +1,25 @@
+/*.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    color: rgb(189, 182, 202);
+  }*/
+  .fieldset{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    color: rgb(189, 182, 202);
+    padding: 0px 3.5vw;
+    border: none;  
+    min-height: 263px;  
+  }
+
+@media screen and (max-width: 500px) {
+    .fieldset{
+      min-height: 300px;
+      justify-content: space-around;
+    }
+}
+   

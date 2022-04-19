@@ -4,6 +4,7 @@ import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
 import InputField from '../../components/form/input/InputField';
+import Form from '../../components/form/Form';
 import classes from './AddSubgenre.module.css';
 
 const AddSubgenre = () => {
@@ -38,8 +39,7 @@ const AddSubgenre = () => {
         <>
         <Header/>
             <Main>
-                <form onSubmit={handleSubmit} className={classes.form}>  
-                    <fieldset>          
+                <Form>          
                     <InputField
                         title = 'Subgenre name'
                         type = 'text'
@@ -55,9 +55,9 @@ const AddSubgenre = () => {
                                 onChange = {() => setIsDescriptionRequired(!isDescriptionRequired)}/>
                             <span className={classes.checkmark}></span>
                         </label>
-                    </fieldset>
+                    </Form>
                     <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text="Next"/>            
-                </form>
+                
             </Main>
         </>
     )

@@ -6,6 +6,7 @@ import Footer from '../../components/layout/Footer';
 import Input from '../../components/form/input/Input';
 import DataList from '../../components/form/input/DataList';
 import Textarea from '../../components/form/input/Textarea';
+import Form from '../../components/form/Form';
 import { maxDate } from '../../util/helper';
 
 import classes from './Information.module.css';
@@ -87,8 +88,7 @@ const Information = () => {
                 <Main>
 
                 
-        <form onSubmit = {handleSubmit}>
-            <fieldset>
+        <Form>
                 <Input
                     title = 'Book title'
                     type = 'text'
@@ -191,9 +191,9 @@ const Information = () => {
                     value = {description}
                     onChange = {(e) => setDescription(e.target.value)}
                 />
-            </fieldset>
+            </Form>
             <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
-        </form>
+        
         </Main>
         </>
     )
