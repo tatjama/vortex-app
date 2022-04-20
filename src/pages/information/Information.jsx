@@ -85,7 +85,7 @@ const Information = () => {
         history.push('/success');
     }
     const url = 'http://localhost:8000/books';
-    
+
     const postBook = async (book) => {
         try {
             const res = await fetch(url, { 

@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { DUMMY_DATA } from '../util/data';
+//import { DUMMY_DATA } from '../util/data';
 
 const GenreContext = createContext({
     genreList: [],
@@ -12,7 +12,8 @@ const GenreContext = createContext({
     subgenreId: 24,
     isAddSubgenreShow: false,
     isAddSubgenre: () => {},
-    resetContext: () => {},    
+    resetContext: () => {},
+    setGenreList: () => {},    
 });
 
 export const GenreContextProvider = (props) => {
@@ -20,7 +21,7 @@ export const GenreContextProvider = (props) => {
     const [selectedGenre, setSelectedGenre] = useState(null);
     const [selectedSubgenre, setSelectedSubgenre] = useState(null);
     const [subgenreList, setSubgenreList] = useState([]);
-    const [genreList, setGenreList] = useState(DUMMY_DATA.genres);
+    const [genreList, setGenreList] = useState([]);
     const [subgenreId, setSubgenreId] = useState(24);
     const [isAddSubgenreShow, setIsAddSubgenreShow] = useState(false);
     
@@ -69,7 +70,8 @@ export const GenreContextProvider = (props) => {
         subgenreId: subgenreId,
         isAddSubgenreShow: isAddSubgenreShow, 
         isAddSubgenre: isAddSubgenreHandler,
-        resetContext: resetContextHandler,       
+        resetContext: resetContextHandler,  
+        setGenreList: setGenreList,     
     };
 
     return <GenreContext.Provider value={context}>

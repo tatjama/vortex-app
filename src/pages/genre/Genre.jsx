@@ -1,21 +1,31 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
 import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
-
 import Button from '../../components/button/Button';
 
 const Genre = () => {
 
     const [activeButton, setActiveButton] = useState(null);
     const [ genre, setGenre ] = useState(null);
-
+    
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
     const genres = genreCtx.genreList;
     console.log(genreCtx)
+
+    const url = 'http://localhost:8000/genres';
+    const { data, error } = useFetch(url, {});
+    console.log(error)
+
+    useEffect(()=> {
+        genreCtx.setGenreList(data);
+    }, [genreCtx, data])
+
+    
     
     const handleChooseGenre = (id) => {
         setActiveButton(id);
