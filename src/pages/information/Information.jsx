@@ -80,8 +80,26 @@ const Information = () => {
             description: description,
             descriptionIsRequired: selectedSubgenre.isDescriptionRequired       
         }
-        console.log(book);
+        
+        postBook(book);
         history.push('/success');
+    }
+    const url = 'http://localhost:8000/books';
+    
+    const postBook = async (book) => {
+        try {
+            const res = await fetch(url, { 
+            method: 'POST',
+            body: JSON.stringify(book),
+            headers: {'Content-Type': 'application/json',}
+        })
+        const data = await res.json();
+        console.log(book);
+        console.log('Book is added...');    
+        } catch (error) {
+            console.log(error);
+        }        
+        
     }
 
     const handleBackClick = (e) => {
