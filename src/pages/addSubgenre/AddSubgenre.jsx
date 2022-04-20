@@ -32,7 +32,6 @@ const AddSubgenre = () => {
             }
             genreCtx.addSubgenre(subgenre);
             genreCtx.selectSubgenre(subgenre);
-            /**close page 3 */
             history.push('/information');
         }
         

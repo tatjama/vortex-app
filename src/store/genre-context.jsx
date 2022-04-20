@@ -55,8 +55,6 @@ export const GenreContextProvider = (props) => {
         setSelectedGenre(null);
         setSelectedSubgenre(null);
         setSubgenreList([]);
-        //setGenreList(DUMMY_DATA.genres);
-        //setSubgenreId(24);
         setIsAddSubgenreShow(false);    
     }
 

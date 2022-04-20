@@ -18,10 +18,7 @@ const Subgenre = () => {
     console.log(genreCtx)
     const handleChooseSubgenre = (id) => {
         setActiveButton(id);
-        if(id === 'addNew'){
-        
-            /**open page 3 */
-        }else{
+        if(id !== 'addNew'){
             const chosenSubgenre = subgenres.filter(item => item.id === id); 
             setSubgenre(chosenSubgenre[0]);
         }
@@ -40,8 +37,6 @@ const Subgenre = () => {
     }
 
     const handleBackClick = () => {
-        
-        //history.push('/');
         history.goBack();
     }
     

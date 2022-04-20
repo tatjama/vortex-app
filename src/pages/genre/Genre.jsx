@@ -16,6 +16,7 @@ const Genre = () => {
     const genreCtx = useContext(GenreContext);
     const genres = genreCtx.genreList;
     console.log(genreCtx)
+    
     const handleChooseGenre = (id) => {
         setActiveButton(id);
         const chosenGenre =  genres.filter(item => item.id === id);
