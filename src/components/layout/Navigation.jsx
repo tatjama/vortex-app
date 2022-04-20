@@ -12,12 +12,11 @@ const Navigation = () => {
   const isAddSubgenreShow = genreCtx.isAddSubgenreShow;
 
   const handleFourthClick = (e) => {
-    (isFourthDisabled || (!genre || !subgenre)) && e.preventDefault();
-     
+    (isFourthDisabled || (!genre || !subgenre)) && e.preventDefault();     
   }
 
   const handleSecondClick = () => {
-    genreCtx.isAddSubgenreShow && genreCtx.isAddSubgenre();
+    isAddSubgenreShow && genreCtx.isAddSubgenre();
   }
 
   const handleFirstClick = (e) => {
@@ -28,6 +27,11 @@ const Navigation = () => {
     ((genre && subgenre) || (genre && isAddSubgenreShow)) && setIsFourthDisabled(false);  
   }, [genre, subgenre, isAddSubgenreShow])
 
+  const renderContent = () => (((genre && subgenre) || (genre && isAddSubgenreShow)))? `4`: '...';
+
+  const renderSubtitle = () => (((genre && subgenre) || (genre && isAddSubgenreShow)))
+              ? <span className={classes.span}>Information</span> : null
+  
     return (
         <nav className={classes.nav}>
             <ul className={classes.navigation}>
@@ -41,19 +45,12 @@ const Navigation = () => {
                 </li>
 
                 <li>
-                    {
-                      genre?<NavLink onClick={handleSecondClick}  style={(isActive) => ({
-                              backgroundColor: isActive ? "rgb(54, 54, 85)" : "rgb(222, 222, 238)",
-                              color: isActive ? "rgb(187, 188, 243)" : "rgb(123, 124, 180)"
-                          })}  to={`/subgenre`}>2
+                    <NavLink onClick={handleSecondClick}  style={(isActive) => ({
+                              backgroundColor: isActive && genre ? "rgb(54, 54, 85)" : "rgb(222, 222, 238)",
+                              color: isActive && genre ? "rgb(187, 188, 243)" : "rgb(123, 124, 180)"
+                          })}  to={genre? `/subgenre`: '#'}>2
                           <span className={classes.span}>Subgenre</span>
-                      </NavLink>: <NavLink exact={true}  style={(isActive) => ({
-                            backgroundColor:  "rgb(222, 222, 238)",
-                            color: "rgb(123, 124, 180)"
-                        })}  to={`#`}>2
-                        <span className={classes.span}>Genre</span>
-                    </NavLink> 
-                    }                
+                      </NavLink>     
                 </li>
 
                 {isAddSubgenreShow && <li>
@@ -69,27 +66,11 @@ const Navigation = () => {
                     <NavLink onClick = {handleFourthClick} style={(isActive) => ({
                             backgroundColor: isActive ? "rgb(54, 54, 85)" : "rgb(222, 222, 238)",
                             color: isActive ? "rgb(187, 188, 243)" : "rgb(123, 124, 180)"
-                        })}  to={ `/information`}> { 
-                              ((genre && subgenre) || (genre && isAddSubgenreShow))? '4': '...'
-                              }
-                        <span className={classes.span}>{ 
-                              ((genre && subgenre) || (genre && isAddSubgenreShow)) && 'Information'
-                            }</span>
+                        })}  to={ `/information`}> 
+                        {renderContent()}
+                        {renderSubtitle()}
                     </NavLink>                
-                </li>
-                {/*<li>
-                    <NavLink  style={(isActive) => ({
-                            backgroundColor: isActive ? "rgb(54, 54, 85)" : "rgb(222, 222, 238)",
-                            color: isActive ? "rgb(187, 188, 243)" : "rgb(123, 124, 180)"
-                        })}  to={((genre && subgenre) || (genre && isAddSubgenreShow))? `/information`: '#'}> { 
-                              ((genre && subgenre) || (genre && isAddSubgenreShow))? '4': '...'
-                              }
-                        <span className={classes.span}>{ 
-                              ((genre && subgenre) || (genre && isAddSubgenreShow)) && 'Information'
-                            }</span>
-                    </NavLink>                
-                          </li>*/}
-
+                </li>                
             </ul>
             
         </nav>
