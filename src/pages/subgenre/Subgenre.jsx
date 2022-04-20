@@ -15,7 +15,7 @@ const Subgenre = () => {
     
     const genreCtx = useContext(GenreContext);
     const subgenres = genreCtx.subgenreList;
-
+    console.log(genreCtx)
     const handleChooseSubgenre = (id) => {
         setActiveButton(id);
         if(id === 'addNew'){
@@ -33,14 +33,16 @@ const Subgenre = () => {
             history.push('/information');
         }else{
             if(activeButton === 'addNew'){
-                genreCtx.isAddSubgenre();
+                 genreCtx.isAddSubgenre();
                 history.push('/addSubgenre');
             }
         }
     }
 
     const handleBackClick = () => {
-        history.push('/');
+        
+        //history.push('/');
+        history.goBack();
     }
     
     return(

@@ -15,11 +15,12 @@ const AddSubgenre = () => {
 
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
-
+    console.log(genreCtx)
+    
     const handleBackClick = (e) => {
         e.preventDefault();
-        /**close page 3 */
-        history.push('/subgenre');
+        genreCtx.isAddSubgenre();
+        history.goBack();
     }
 
     const handleSubmit = (e) => {

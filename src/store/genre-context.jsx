@@ -11,7 +11,8 @@ const GenreContext = createContext({
     addSubgenre: (subgenre) => {},
     subgenreId: 24,
     isAddSubgenreShow: false,
-    isAddSubgenre: () => {},    
+    isAddSubgenre: () => {},
+    resetContext: () => {},    
 });
 
 export const GenreContextProvider = (props) => {
@@ -41,12 +42,22 @@ export const GenreContextProvider = (props) => {
         genre.subgenres = listOfSubgenres;
         const genres = genreList.filter(item => item.name !==genre.name);
         const list = [...genres, genre]; 
+        list.sort((a,b) => a.id-b.id)
         setSubgenreId(subgenre.id)
         setGenreList(list);
     }
 
     const isAddSubgenreHandler = () => {
         setIsAddSubgenreShow(!isAddSubgenreShow);
+    }
+
+    const resetContextHandler = () => {
+        setSelectedGenre(null);
+        setSelectedSubgenre(null);
+        setSubgenreList([]);
+        //setGenreList(DUMMY_DATA.genres);
+        //setSubgenreId(24);
+        setIsAddSubgenreShow(false);    
     }
 
     const context = {
@@ -59,7 +70,8 @@ export const GenreContextProvider = (props) => {
         addSubgenre: addSubgenreHandler,
         subgenreId: subgenreId,
         isAddSubgenreShow: isAddSubgenreShow, 
-        isAddSubgenre: isAddSubgenreHandler       
+        isAddSubgenre: isAddSubgenreHandler,
+        resetContext: resetContextHandler,       
     };
 
     return <GenreContext.Provider value={context}>

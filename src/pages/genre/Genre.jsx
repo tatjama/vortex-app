@@ -15,7 +15,7 @@ const Genre = () => {
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
     const genres = genreCtx.genreList;
-    
+    console.log(genreCtx)
     const handleChooseGenre = (id) => {
         setActiveButton(id);
         const chosenGenre =  genres.filter(item => item.id === id);
@@ -27,6 +27,10 @@ const Genre = () => {
             genreCtx.selectGenre(genre);
             history.push('/subgenre');
         } 
+    }
+
+    const handleBackClick = () => {
+        history.goBack();
     }
 
     return(
@@ -44,7 +48,7 @@ const Genre = () => {
                                 />
                         })
                     }
-                    <Footer clickHandler = {handleClick} text="Next"/>               
+                    <Footer backClickHandler = {handleBackClick} clickHandler = {handleClick} text="Next"/>               
                 </Main>
         </>
     )

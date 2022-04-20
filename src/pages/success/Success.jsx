@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import GenreContext from '../../store/genre-context';
 import Button from './../../components/button/Button';
 import Icon from './../../components/icon/Icon';
 import classes from './Success.module.css';
 
 const Success = () => {
     const history = useHistory();
+    const genreCtx = useContext(GenreContext);
 
     const handleClick = () => {
+        genreCtx.resetContext();
         history.push('/');
     }
     

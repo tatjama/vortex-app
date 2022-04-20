@@ -33,7 +33,7 @@ const Information = () => {
     const genreCtx = useContext(GenreContext);
     const selectedSubgenre = genreCtx.selectedSubgenre;
     const selectedGenre = genreCtx.selectedGenre;  
-
+    console.log(genreCtx)
     const addNewAuthor = () => {        
         if(author !== '' && authors.indexOf(author) === -1){
             const newAuthors = [...authors, author];
@@ -86,7 +86,7 @@ const Information = () => {
 
     const handleBackClick = (e) => {
         e.preventDefault();
-        history.push('/subgenre');
+        history.goBack();
     }
 
     return (
