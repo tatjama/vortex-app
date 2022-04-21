@@ -5,7 +5,7 @@ import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
-import Button from '../../components/button/Button';
+import Buttons from '../../components/button/Buttons';
 
 const Genre = () => {
 
@@ -28,12 +28,6 @@ const Genre = () => {
     }, [genreCtx, data])
 
     
-    
-    const handleChooseGenre = (id) => {
-        setActiveButton(id);
-        const chosenGenre =  genres.filter(item => item.id === id);
-        setGenre(chosenGenre[0]);
-    }
 
     const handleClick = () => {
         if(genre){
@@ -50,17 +44,12 @@ const Genre = () => {
         <>
             <Header/>
                 <Main>
-                    {
-                        genres.map((genre) => {
-                        return <Button 
-                                    styleDescription = { (activeButton === genre.id)? 'btn_active': "btn"} 
-                                    clickHandler = {() => handleChooseGenre(genre.id)} 
-                                    text = {genre.name}
-                                    id = {genre.id}
-                                    key = {genre.id}
-                                />
-                        })
-                    }
+                    <Buttons 
+                        items = {genres} 
+                        setItem = {setGenre} 
+                        activeButton = {activeButton} 
+                        setActiveButton = {setActiveButton}
+                    />                      
                     <Footer backClickHandler = {handleBackClick} clickHandler = {handleClick} text="Next"/>               
                 </Main>
         </>

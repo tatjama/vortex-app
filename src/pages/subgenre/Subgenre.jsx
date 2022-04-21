@@ -4,25 +4,19 @@ import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
-import Button from '../../components/button/Button';
+import Buttons from '../../components/button/Buttons';
 
 const Subgenre = () => {
 
     const [ activeButton, setActiveButton ] = useState(null);
     const [ subgenre, setSubgenre ] = useState(null);
+    const addNewButton = {name: "Add new", id:"addNew" };
 
     const history = useHistory();
     
     const genreCtx = useContext(GenreContext);
-    const subgenres = genreCtx.subgenreList;
-    console.log(genreCtx)
-    const handleChooseSubgenre = (id) => {
-        setActiveButton(id);
-        if(id !== 'addNew'){
-            const chosenSubgenre = subgenres.filter(item => item.id === id); 
-            setSubgenre(chosenSubgenre[0]);
-        }
-    }
+    const subgenres = [...genreCtx.subgenreList, addNewButton];    
+    console.log(genreCtx)    
 
     const handleClick = () => {
         if(subgenre){
@@ -44,24 +38,12 @@ const Subgenre = () => {
         <>
             <Header/>
                 <Main>
-                    {
-                        subgenres.map((subgenre) => {
-                            return <Button 
-                                styleDescription = { (activeButton === subgenre.id)? 'btn_active': "btn"} 
-                                clickHandler = {() => handleChooseSubgenre(subgenre.id)} 
-                                text = {subgenre.name}
-                                id = {subgenre.id}
-                                key = {subgenre.id}
-                            />
-                        })
-                    }
-                            <Button 
-                                styleDescription = { (activeButton === "addNew")? 'btn_active': "btn"} 
-                                clickHandler = {() => handleChooseSubgenre("addNew")} 
-                                text = "Add new"
-                                id = "addNew"
-                                key = "addNew"
-                            />
+                     <Buttons 
+                        items = {subgenres} 
+                        setItem = {setSubgenre} 
+                        activeButton = {activeButton} 
+                        setActiveButton = {setActiveButton}
+                    />  
                     <Footer backClickHandler = {handleBackClick}  clickHandler = {handleClick} text="Next"/>
                 </Main>            
         </>
