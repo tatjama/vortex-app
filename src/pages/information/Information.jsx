@@ -38,7 +38,6 @@ const Information = () => {
     const genreCtx = useContext(GenreContext);
     const selectedSubgenre = genreCtx.selectedSubgenre;
     const selectedGenre = genreCtx.selectedGenre;  
-    console.log(genreCtx);
 
     const initValues = {    
         genre: selectedGenre.name,
@@ -51,14 +50,6 @@ const [values, setValues] = useState(initValues);
 const [items, setItems] = useState(initItems);    
 const [errors, setErrors] = useState({});   
 
-/*const addNewItem = (e) => { 
-    const{name, value} = e.target
-    if(value !== '' && items[name + 's'].indexOf(value) === -1){     
-        const newList = [...items[name + 's'], value];
-        const newItems = {...items, [name + 's']:newList};
-        setItems( values => ( newItems));
-    }
-}*/
     
     const handleClear = (e) => {
         const {name} = e.target;
@@ -99,7 +90,6 @@ const [errors, setErrors] = useState({});
         console.log(book);
         console.log('Book is added...');    
         } catch (error) {
-            console.log(error);
         }        
         
     }
@@ -131,8 +121,7 @@ const [errors, setErrors] = useState({});
                             arr = {items.authors}
                             onChange = {handleChange}
                             onClick={handleClear}
-                            onFocus={handleClear}
-                            //onBlur = {addNewItem}                            
+                            onFocus={handleClear}                            
                         />
                         {errors.author && <p className = {classes.warning}>{errors.author}</p>}
                         <Input
@@ -153,7 +142,6 @@ const [errors, setErrors] = useState({});
                             onChange = {handleChange}
                             onClick={handleClear}
                             onFocus={handleClear}
-                            //onBlur = {addNewPublisher}
                         />  
                         {errors.publisher && <p className = {classes.warning}>{errors.publisher}</p>}
                         <Input
@@ -185,7 +173,6 @@ const [errors, setErrors] = useState({});
                             onChange = {handleChange}
                             onClick={handleClear}
                             onFocus={handleClear}
-                            //onBlur = {addNewFormat}
                         />
                         {errors.format && <p className = {classes.warning}>{errors.format}</p>}    
                         <div className={classes.edition_container}>
@@ -211,7 +198,6 @@ const [errors, setErrors] = useState({});
                                     onChange = {handleChange}
                                     onClick={handleClear}
                                     onFocus={handleClear}
-                                    //onBlur = {addNewLanguage}
                                 />  
                                 {errors.language && <p className = {classes.warning}>{errors.language}</p>}                                    
                             </div>    

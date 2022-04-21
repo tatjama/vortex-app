@@ -15,7 +15,6 @@ const AddSubgenre = () => {
 
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
-    console.log(genreCtx)
     
     const handleBackClick = (e) => {
         e.preventDefault();

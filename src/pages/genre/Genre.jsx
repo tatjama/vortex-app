@@ -15,11 +15,9 @@ const Genre = () => {
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
     const genres = genreCtx.genreList;
-    console.log(genreCtx)
 
     const url = 'http://localhost:8000/genres';
     const { data, error } = useFetch(url, {});
-    console.log(error)
 
     useEffect(()=> {
         if(genreCtx.genreList.length < 1){

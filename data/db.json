@@ -107,5 +107,53 @@
     }
   ],
   "books": [
+    {
+      "genre": "Genre 5",
+      "subgenre": "New subgenre",
+      "descriptionIsRequired": true,
+      "title": "New Title",
+      "author": "Ivo Andric",
+      "isbn": "123-24656-3678-789",
+      "publisher": "Vulkan",
+      "published": "2022-04-15",
+      "pagesNumber": "100",
+      "format": "Format 2",
+      "edition": "10",
+      "language": "English",
+      "description": "desc",
+      "id": 1
+    },
+    {
+      "genre": "Genre 1",
+      "subgenre": "Subgenre 5",
+      "descriptionIsRequired": true,
+      "title": "t",
+      "author": "Branko Copic",
+      "isbn": "12345",
+      "publisher": "Laguna",
+      "published": "2022-04-14",
+      "pagesNumber": "1",
+      "format": "Format 1",
+      "edition": "1",
+      "language": "English",
+      "description": "e",
+      "id": 2
+    },
+    {
+      "genre": "Genre 3",
+      "subgenre": "New subgenre",
+      "descriptionIsRequired": true,
+      "title": "title",
+      "author": "Branko Copic",
+      "isbn": "1234",
+      "publisher": "Logos",
+      "published": "2022-04-13",
+      "pagesNumber": "10",
+      "format": "Format 1",
+      "edition": "4",
+      "language": "English",
+      "description": "description",
+      "id": 3
+    }
   ]
 }

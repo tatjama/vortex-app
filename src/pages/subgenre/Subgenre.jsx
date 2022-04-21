@@ -15,8 +15,7 @@ const Subgenre = () => {
     const history = useHistory();
     
     const genreCtx = useContext(GenreContext);
-    const subgenres = [...genreCtx.subgenreList, addNewButton];    
-    console.log(genreCtx)    
+    const subgenres = [...genreCtx.subgenreList, addNewButton];
 
     const handleClick = () => {
         if(subgenre){
