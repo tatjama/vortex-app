@@ -1,0 +1,66 @@
+.input, .textarea{
+    width: 100%;
+    height: 80px;
+    font-family:  'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(54, 54, 85);
+    padding: 10px 20px;
+    margin: 10px 0 30px 0;
+    border-radius: 10px;
+    outline: none;
+    border: 4px solid rgb(189, 182, 202);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+  .input::placeholder, .textarea::placeholder{
+    font-weight: bold;
+    letter-spacing: -2px;
+    opacity: 0.4;
+    color:rgb(189, 182, 202);
+  }
+  .input, .textarea {
+    width: 100%;
+  }
+  .input[name="pagesNumber"]{
+    width: 30%;
+  }  
+  .input[type="date"], .input[name="format"]{
+    width: 40%;
+  }
+  .textarea{
+    height: 150px;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .input[name="pagesNumber"], .input[type="date"], .input[name="format"]{
+      width: 50%;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .input::placeholder, .textarea::placeholder{
+     font-size: 1.8rem;    
+   }  
+ } 
+ @media screen and (max-width: 500px) {
+   .input::placeholder, .textarea::placeholder{
+     font-size: 1.1rem;    
+   }
+   .input, .textarea{
+     height: 50px;
+     font-size: 1.3rem;  
+     padding: 7px 15px;
+     margin: 10px 0 20px 0;
+     border: 3px solid rgb(189, 182, 202);
+     }
+   .input[type="date"], .input[name="format"]{
+     width: 100%;
+   }
+   .textarea{
+     height: 100px;
+   }
+ }
+ 
+ 

@@ -1,0 +1,9 @@
+.buttons{
+    min-height: 265px;
+}
+
+@media screen and (max-width: 500px) {
+    .buttons{
+        min-height: 300px;
+    }
+}
