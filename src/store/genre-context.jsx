@@ -39,15 +39,16 @@ export const GenreContextProvider = (props) => {
     const addSubgenreHandler = (subgenre) => {
         subgenre.id = subgenreId + 1;
         const listOfSubgenres = [...subgenreList, subgenre];
+        setSubgenreList(listOfSubgenres);
         const genre = {...selectedGenre};
         genre.subgenres = listOfSubgenres;
         const genres = genreList.filter(item => item.name !==genre.name);
         const list = [...genres, genre]; 
         list.sort((a,b) => a.id-b.id)
-        setSubgenreId(subgenre.id)
+        setSubgenreId(subgenre.id);
         setGenreList(list);
     }
-
+    
     const isAddSubgenreHandler = () => {
         setIsAddSubgenreShow(!isAddSubgenreShow);
     }

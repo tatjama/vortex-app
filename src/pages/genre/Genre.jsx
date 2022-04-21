@@ -22,7 +22,9 @@ const Genre = () => {
     console.log(error)
 
     useEffect(()=> {
-        genreCtx.setGenreList(data);
+        if(genreCtx.genreList.length < 1){
+            genreCtx.setGenreList(data);
+        }        
     }, [genreCtx, data])
 
     
