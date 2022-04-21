@@ -5,6 +5,11 @@
     width: 40%;
     margin-right: 30px;
 }
+.warning{
+    color: red;
+    font-size: 0.67rem;
+    margin-bottom: 10px;
+}
 @media screen and (max-width: 1000px){
     .edition_container div{
         width: 50%;

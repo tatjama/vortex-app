@@ -1,5 +1,5 @@
 import Button from './Button';
-
+import classes from './Buttons.module.css';
 const Buttons= ({items, setItem, activeButton, setActiveButton}) => {
         
     const handleChooseSubgenre = (id) => {
@@ -11,7 +11,7 @@ const Buttons= ({items, setItem, activeButton, setActiveButton}) => {
     }
 
     return(
-        <>
+        <section className={classes.buttons}>
             {
                 items.map((item) => {
                     return <Button 
@@ -23,7 +23,7 @@ const Buttons= ({items, setItem, activeButton, setActiveButton}) => {
                             />
                         })
             }
-        </>
+        </section>
     )
 }
 

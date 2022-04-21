@@ -9,80 +9,82 @@ import DataList from '../../components/form/input/DataList';
 import Textarea from '../../components/form/input/Textarea';
 import Form from '../../components/form/Form';
 import { maxDate } from '../../util/helper';
-
+import validateForm from '../../util/validateForm';
 import classes from './Information.module.css';
 
-const Information = () => {
+const initialValues = {    
+    title: '',
+    author: '', 
+    isbn: '',
+    publisher: '', 
+    published: '',
+    pagesNumber: '',
+    format: '',
+    edition: '',
+    language: '',
+    description: '',
+}
 
-    const [ title, setTitle ] = useState('');
-    const [ authors, setAuthors ] = useState(['Branko Copic', 'Ivo Andric', 'Erich Marija Remark', 'Umberto Eko']);
-    const [ author, setAuthor ] = useState('');
-    const [ isbn, setIsbn ] = useState('');
-    const [ publishers, setPublishers ] = useState(['Laguna', 'Vulkan', 'Klet', 'Logos']);
-    const [ publisher, setPublisher ] = useState('');    
-    const [ published, setPublished ] = useState('');
-    const [ pagesNumber, setPagesNumber ] = useState('');
-    const [ formats, setFormats ] = useState(['Format 1', 'Format 2', 'Format 3']);
-    const [ format, setFormat ] = useState('');
-    const [ edition, setEdition ] = useState('');
-    const [ languages, setLanguages ] = useState(['English', 'Serbian', 'Russian']);
-    const [ language, setLanguage ] = useState('');
-    const [ description, setDescription ] = useState('');    
+const initItems = {
+    authors: ['Branko Copic', 'Ivo Andric', 'Erich Marija Remark', 'Umberto Eko'],
+    publishers: ['Laguna', 'Vulkan', 'Klet', 'Logos'],
+    formats: ['Format 1', 'Format 2', 'Format 3'],
+    languages: ['English', 'Serbian', 'Russian'],    
+}
 
+const Information = () => {    
+   
     const history = useHistory();
     const genreCtx = useContext(GenreContext);
     const selectedSubgenre = genreCtx.selectedSubgenre;
     const selectedGenre = genreCtx.selectedGenre;  
-    console.log(genreCtx)
-    const addNewAuthor = () => {        
-        if(author !== '' && authors.indexOf(author) === -1){
-            const newAuthors = [...authors, author];
-            setAuthors(newAuthors);
-        }
+    console.log(genreCtx);
+
+    const initValues = {    
+        genre: selectedGenre.name,
+        subgenre: selectedSubgenre.name,        
+        descriptionIsRequired: selectedSubgenre.isDescriptionRequired,
+        ...initialValues    
+}
+
+const [values, setValues] = useState(initValues);
+const [items, setItems] = useState(initItems);    
+const [errors, setErrors] = useState({});   
+
+/*const addNewItem = (e) => { 
+    const{name, value} = e.target
+    if(value !== '' && items[name + 's'].indexOf(value) === -1){     
+        const newList = [...items[name + 's'], value];
+        const newItems = {...items, [name + 's']:newList};
+        setItems( values => ( newItems));
     }
+}*/
     
-    const addNewPublisher = () => {        
-        if(publisher !== '' && publishers.indexOf(publisher) === -1){        
-            const newPublishers = [...publishers, publisher];
-            setPublishers(newPublishers);
-        }
+    const handleClear = (e) => {
+        const {name} = e.target;
+        const newValues = {...values, [name]:""};
+        setValues(values => (newValues));
     }
 
-    const addNewFormat = () => {        
-        if(format !== '' && formats.indexOf(format) === -1){        
-            const newFormats = [...formats, format];
-            setFormats(newFormats);
-        }
-    }
-
-    const addNewLanguage = () => {        
-        if(language !== '' && languages.indexOf(language) === -1){        
-            const newLanguages = [...languages, language];
-            setLanguages(newLanguages);
-        }
-    }
+    const handleChange = (e)=>{
+        const {name, value} = e.target;
+        const newValues = {...values, [name]: value};
+        setErrors(validateForm(newValues));
+        setValues(values =>(newValues));
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /**check if empty fields validation */
-        const book = {
-            genre: selectedGenre.name,
-            subgenre: selectedSubgenre.name,
-            title: title,
-            author: author, 
-            isbn: isbn,
-            publisher: publisher, 
-            published: published,
-            pagesNumber: pagesNumber,
-            format: format,
-            edition: edition,
-            language: language,
-            description: description,
-            descriptionIsRequired: selectedSubgenre.isDescriptionRequired       
+        setErrors(validateForm(values));
+        if(Object.keys(errors).length === 0 || 
+        (Object.keys(errors).length === 1 && !values.descriptionIsRequired && Object.keys(errors)[0] === "description")){
+        postBook(values);
+        history.push('/success');        
+        }else{
+            alert("you have errors")
+            console.log(errors);
         }
         
-        postBook(book);
-        history.push('/success');
     }
     const url = 'http://localhost:8000/books';
 
@@ -116,69 +118,76 @@ const Information = () => {
                             title = 'Book title'
                             type = 'text'
                             name = 'title'
-                            value = {title}
-                            onChange = {(e) => {setTitle(e.target.value)}}
+                            value = {values.title}
+                            onChange = {handleChange}
                         />
+                        {errors.title && <p className = {classes.warning}>{errors.title}</p>}
                         <DataList
                             title = 'Author'
                             type = 'input'
                             name = 'author'
                             list = 'authors'
-                            value = {author}
-                            arr = {authors}
-                            onChange = {(e) => {setAuthor(e.target.value)}}
-                            onClick={() => {setAuthor('')}}
-                            onFocus={() => {setAuthor('')}}
-                            onBlur = {addNewAuthor}
+                            value = {values.author}
+                            arr = {items.authors}
+                            onChange = {handleChange}
+                            onClick={handleClear}
+                            onFocus={handleClear}
+                            //onBlur = {addNewItem}                            
                         />
+                        {errors.author && <p className = {classes.warning}>{errors.author}</p>}
                         <Input
                             title = 'ISBN'
                             type = 'text'
                             name = 'isbn'
-                            value = {isbn}
-                            onChange = {(e) => {setIsbn(e.target.value)}}
+                            value = {values.isbn}
+                            onChange = {handleChange}
                         />
+                        {errors.isbn && <p className = {classes.warning}>{errors.isbn}</p>}
                         <DataList
                             title = 'Publisher'
                             type = 'input'
                             name = 'publisher'
                             list = 'publishers'
-                            value = {publisher}
-                            arr = {publishers}
-                            onChange = {(e) => {setPublisher(e.target.value)}}
-                            onClick={() => {setPublisher('')}}
-                            onFocus={() => {setPublisher('')}}
-                            onBlur = {addNewPublisher}
+                            value = {values.publisher}
+                            arr = {items.publishers}
+                            onChange = {handleChange}
+                            onClick={handleClear}
+                            onFocus={handleClear}
+                            //onBlur = {addNewPublisher}
                         />  
+                        {errors.publisher && <p className = {classes.warning}>{errors.publisher}</p>}
                         <Input
                             title="Date published"
                             type="date"
                             id="published"
                             name="published"
-                            value={published}
+                            value={values.published}
                             max={maxDate()}
-                            onChange = {(e) => setPublished(e.target.value)} 
+                            onChange = {handleChange} 
                         />
+                        {errors.published && <p className = {classes.warning}>{errors.published}</p>}
                         <Input
                             title = 'Number of pages'
                             type = 'number'
                             name = 'pagesNumber'
                             min = '1'
-                            value = {pagesNumber}
-                            onChange = {(e) => {setPagesNumber(e.target.value)}}
+                            value = {values.pagesNumber}
+                            onChange = {handleChange}
                         />
+                        {errors.pagesNumber && <p className = {classes.warning}>{errors.pagesNumber}</p>}
                         <DataList
                             title = 'Format'
                             type = 'input'
                             name = 'format'
                             list = 'formats'
-                            value = {format}
-                            arr = {formats}
-                            onChange = {(e) => {setFormat(e.target.value)}}
-                            onClick={() => {setFormat('')}}
-                            onFocus={() => {setFormat('')}}
-                            onBlur = {addNewFormat}
-                        />    
+                            value = {values.format}
+                            arr = {items.formats}
+                            onChange = {handleChange}
+                            onClick={handleClear}
+                            onFocus={handleClear}
+                            //onBlur = {addNewFormat}
+                        />
+                        {errors.format && <p className = {classes.warning}>{errors.format}</p>}    
                         <div className={classes.edition_container}>
                             <div>
                                 <Input
@@ -186,9 +195,10 @@ const Information = () => {
                                     type = 'number'
                                     name = 'edition'
                                     min = '1'
-                                    value = {edition}
-                                    onChange = {(e) => {setEdition(e.target.value)}}
-                                />                   
+                                    value = {values.edition}
+                                    onChange = {handleChange}
+                                /> 
+                                {errors.edition && <p className = {classes.warning}>{errors.edition}</p>}                  
                             </div>
                             <div>
                                 <DataList
@@ -196,13 +206,14 @@ const Information = () => {
                                     type = 'input'
                                     name = 'language'
                                     list = 'languages'
-                                    value = {language}
-                                    arr = {languages}
-                                    onChange = {(e) => {setLanguage(e.target.value)}}
-                                    onClick={() => {setLanguage('')}}
-                                    onFocus={() => {setLanguage('')}}
-                                    onBlur = {addNewLanguage}
-                                />                                      
+                                    value = {values.language}
+                                    arr = {items.languages}
+                                    onChange = {handleChange}
+                                    onClick={handleClear}
+                                    onFocus={handleClear}
+                                    //onBlur = {addNewLanguage}
+                                />  
+                                {errors.language && <p className = {classes.warning}>{errors.language}</p>}                                    
                             </div>    
                         </div> 
                         <Textarea
@@ -210,9 +221,10 @@ const Information = () => {
                             title="Description"
                             placeholder="Type the description..."
                             rows = '3'
-                            value = {description}
-                            onChange = {(e) => setDescription(e.target.value)}
+                            value = {values.description}
+                            onChange = {handleChange}
                         />
+                        {errors.description && values.descriptionIsRequired && <p className = {classes.warning}>{errors.description}</p>}
                     </Form>
                     <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
         
