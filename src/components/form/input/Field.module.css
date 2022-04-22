@@ -33,7 +33,11 @@
   .textarea{
     height: 150px;
   }
-  
+  .warning{
+    color: red;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
   @media screen and (max-width: 1000px) {
     .input[name="pagesNumber"], .input[type="date"], .input[name="format"]{
       width: 50%;

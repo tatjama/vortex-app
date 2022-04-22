@@ -50,7 +50,15 @@ const [values, setValues] = useState(initValues);
 const [items, setItems] = useState(initItems);    
 const [errors, setErrors] = useState({});   
 
-    
+const addNewItem = (e) => { 
+    const{name, value} = e.target
+    if(value !== '' && items[name + 's'].indexOf(value) === -1){     
+        const newList = [...items[name + 's'], value];
+        const newItems = {...items, [name + 's']:newList};
+        setItems( values => ( newItems));
+    }
+}
+console.log(items)    
     const handleClear = (e) => {
         const {name} = e.target;
         const newValues = {...values, [name]:""};
@@ -67,8 +75,9 @@ const [errors, setErrors] = useState({});
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validateForm(values));
-        if(Object.keys(errors).length === 0 || 
-        (Object.keys(errors).length === 1 && !values.descriptionIsRequired && Object.keys(errors)[0] === "description")){
+
+        if(Object.keys(errors).length === 0 || (Object.keys(errors).length === 1 && 
+            !values.descriptionIsRequired && Object.keys(errors)[0] === "description")){
         postBook(values);
         history.push('/success');        
         }else{
@@ -110,8 +119,8 @@ const [errors, setErrors] = useState({});
                             name = 'title'
                             value = {values.title}
                             onChange = {handleChange}
+                            error = {errors.title}
                         />
-                        {errors.title && <p className = {classes.warning}>{errors.title}</p>}
                         <DataList
                             title = 'Author'
                             type = 'input'
@@ -121,17 +130,18 @@ const [errors, setErrors] = useState({});
                             arr = {items.authors}
                             onChange = {handleChange}
                             onClick={handleClear}
-                            onFocus={handleClear}                            
+                            onFocus={handleClear}
+                            onBlur = {addNewItem} 
+                            error = {errors.author}                           
                         />
-                        {errors.author && <p className = {classes.warning}>{errors.author}</p>}
                         <Input
                             title = 'ISBN'
                             type = 'text'
                             name = 'isbn'
                             value = {values.isbn}
                             onChange = {handleChange}
+                            error = {errors.isbn}
                         />
-                        {errors.isbn && <p className = {classes.warning}>{errors.isbn}</p>}
                         <DataList
                             title = 'Publisher'
                             type = 'input'
@@ -142,8 +152,9 @@ const [errors, setErrors] = useState({});
                             onChange = {handleChange}
                             onClick={handleClear}
                             onFocus={handleClear}
+                            onBlur = {addNewItem}
+                            error = {errors.publisher}
                         />  
-                        {errors.publisher && <p className = {classes.warning}>{errors.publisher}</p>}
                         <Input
                             title="Date published"
                             type="date"
@@ -151,9 +162,9 @@ const [errors, setErrors] = useState({});
                             name="published"
                             value={values.published}
                             max={maxDate()}
-                            onChange = {handleChange} 
+                            onChange = {handleChange}
+                            error = {errors.published} 
                         />
-                        {errors.published && <p className = {classes.warning}>{errors.published}</p>}
                         <Input
                             title = 'Number of pages'
                             type = 'number'
@@ -161,8 +172,8 @@ const [errors, setErrors] = useState({});
                             min = '1'
                             value = {values.pagesNumber}
                             onChange = {handleChange}
+                            error = {errors.pagesNumber}
                         />
-                        {errors.pagesNumber && <p className = {classes.warning}>{errors.pagesNumber}</p>}
                         <DataList
                             title = 'Format'
                             type = 'input'
@@ -173,8 +184,9 @@ const [errors, setErrors] = useState({});
                             onChange = {handleChange}
                             onClick={handleClear}
                             onFocus={handleClear}
-                        />
-                        {errors.format && <p className = {classes.warning}>{errors.format}</p>}    
+                            onBlur = {addNewItem}
+                            error = {errors.format}
+                        />    
                         <div className={classes.edition_container}>
                             <div>
                                 <Input
@@ -184,8 +196,8 @@ const [errors, setErrors] = useState({});
                                     min = '1'
                                     value = {values.edition}
                                     onChange = {handleChange}
-                                /> 
-                                {errors.edition && <p className = {classes.warning}>{errors.edition}</p>}                  
+                                    error = {errors.edition}
+                                />                   
                             </div>
                             <div>
                                 <DataList
@@ -198,8 +210,9 @@ const [errors, setErrors] = useState({});
                                     onChange = {handleChange}
                                     onClick={handleClear}
                                     onFocus={handleClear}
-                                />  
-                                {errors.language && <p className = {classes.warning}>{errors.language}</p>}                                    
+                                    onBlur = {addNewItem}
+                                    error = {errors.language}
+                                />                                      
                             </div>    
                         </div> 
                         <Textarea
@@ -209,8 +222,9 @@ const [errors, setErrors] = useState({});
                             rows = '3'
                             value = {values.description}
                             onChange = {handleChange}
+                            error = {errors.description}
+                            required = {values.descriptionIsRequired}
                         />
-                        {errors.description && values.descriptionIsRequired && <p className = {classes.warning}>{errors.description}</p>}
                     </Form>
                     <Footer backClickHandler = {handleBackClick}  clickHandler = {handleSubmit} text = "Add"/>
         
