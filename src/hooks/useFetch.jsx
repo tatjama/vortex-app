@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (url, options) => {    
+const useFetch = () => {    
 
     const [data, setData]= useState([]);
     const [error, setError] = useState([]);
 
-    const getGenres = async() => {
+    const apiFetch = async(url, options) => {
         try {
             const res = await fetch(url, options);
             const data  = await res.json();
@@ -14,12 +14,8 @@ const useFetch = (url, options) => {
             setError(error);
         }        
     }
-
-    useEffect(() => {
-        getGenres();
-    }, []);
     
-    return {data, error}
+    return {data, error, apiFetch};
 }
 
 export default useFetch;

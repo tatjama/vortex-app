@@ -16,15 +16,16 @@ const Genre = () => {
     const genreCtx = useContext(GenreContext);
     const genres = genreCtx.genreList;
 
-    const url = 'http://localhost:8000/genres';
-    const { data, error } = useFetch(url, {});
+    const url = process.env.REACT_APP_URL + '/genres';
+    const { data, error, apiFetch } = useFetch();
 
-    useEffect(()=> {
-        if(genreCtx.genreList.length < 1){
-            genreCtx.setGenreList(data);
-        }        
-    }, [genreCtx, data])
+    useEffect(() => {
+       apiFetch(url, {});        
+    }, []);
 
+    useEffect(() => {
+        genreCtx.genreList.length < 1 &&   genreCtx.setGenreList(data);
+    }, [data, genreCtx]);
     
 
     const handleClick = () => {

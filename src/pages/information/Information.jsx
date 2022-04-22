@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import  useForm  from '../../hooks/useForm';
+import useFetch from '../../hooks/useFetch';
 import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
@@ -50,13 +51,22 @@ const Information = () => {
     const {addNewItem, handleClear, handleChange, errors, setErrors, items, values} 
     = useForm(initValues, initItems, validateForm);
     
+    const { data, error, apiFetch } = useFetch();
+
+    
+    const url = process.env.REACT_APP_URL + '/books';
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validateForm(values));
 
         if(Object.keys(errors).length === 0 || (Object.keys(errors).length === 1 && 
             !values.descriptionIsRequired && Object.keys(errors)[0] === "description")){
-        postBook(values);
+        apiFetch(url, { 
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: {'Content-Type': 'application/json',}
+        })
         history.push('/success');        
         }else{
             alert("you have errors")
@@ -64,23 +74,7 @@ const Information = () => {
         }
         
     }
-    const url = 'http://localhost:8000/books';
-
-    const postBook = async (book) => {
-        try {
-            const res = await fetch(url, { 
-            method: 'POST',
-            body: JSON.stringify(book),
-            headers: {'Content-Type': 'application/json',}
-        })
-        const data = await res.json();
-        console.log(book);
-        console.log('Book is added...');    
-        } catch (error) {
-        }        
-        
-    }
-
+   
     const handleBackClick = (e) => {
         e.preventDefault();
         history.goBack();
