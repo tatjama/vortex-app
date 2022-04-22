@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import  useForm  from '../../hooks/useForm';
 import GenreContext from '../../store/genre-context';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
@@ -46,32 +47,9 @@ const Information = () => {
         ...initialValues    
 }
 
-const [values, setValues] = useState(initValues);
-const [items, setItems] = useState(initItems);    
-const [errors, setErrors] = useState({});   
-
-const addNewItem = (e) => { 
-    const{name, value} = e.target
-    if(value !== '' && items[name + 's'].indexOf(value) === -1){     
-        const newList = [...items[name + 's'], value];
-        const newItems = {...items, [name + 's']:newList};
-        setItems( values => ( newItems));
-    }
-}
-console.log(items)    
-    const handleClear = (e) => {
-        const {name} = e.target;
-        const newValues = {...values, [name]:""};
-        setValues(values => (newValues));
-    }
-
-    const handleChange = (e)=>{
-        const {name, value} = e.target;
-        const newValues = {...values, [name]: value};
-        setErrors(validateForm(newValues));
-        setValues(values =>(newValues));
-      };
-
+    const {addNewItem, handleClear, handleChange, errors, setErrors, items, values} 
+    = useForm(initValues, initItems, validateForm);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validateForm(values));
