@@ -20,7 +20,7 @@ const Success = () => {
             <Icon name="fa-check"/>
             <h1>Book added successfully</h1>
             <Button 
-                styleDescription = "btn_active" 
+                styleDescription = "active" 
                 text="Add another book"
                 clickHandler = {handleClick}
             />

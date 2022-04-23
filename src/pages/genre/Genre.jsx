@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import GenreContext from '../../store/genre-context';
+import useGenreContext from '../../hooks/useGenreCtx';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -13,7 +13,7 @@ const Genre = () => {
     const [ genre, setGenre ] = useState(null);
     
     const history = useHistory();
-    const genreCtx = useContext(GenreContext);
+    const genreCtx = useGenreContext();
     const genres = genreCtx.genreList;
 
     const url = process.env.REACT_APP_URL + '/genres';

@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import  useForm  from '../../hooks/useForm';
 import useFetch from '../../hooks/useFetch';
-import GenreContext from '../../store/genre-context';
+import useGenreContext from '../../hooks/useGenreCtx';
 import Header from '../../components/layout/Header';
 import Main from '../../components/layout/Main';
 import Footer from '../../components/layout/Footer';
@@ -37,7 +36,7 @@ const initItems = {
 const Information = () => {    
    
     const history = useHistory();
-    const genreCtx = useContext(GenreContext);
+    const genreCtx = useGenreContext();
     const selectedSubgenre = genreCtx.selectedSubgenre;
     const selectedGenre = genreCtx.selectedGenre;  
 

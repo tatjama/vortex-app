@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import Li from './Li';
 import GenreContext from '../../store/genre-context';
 import classes from './Navigation.module.css';
