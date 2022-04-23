@@ -2,10 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:  'Roboto', sans-serif;
-  
+  font-family:  'Roboto', sans-serif;  
 }
-
 body {
   margin: 0;
   position: relative;
@@ -34,35 +32,15 @@ button{
   -ms-border-radius:15px;
   -o-border-radius:15px;
 }
-
 i{
   margin-right: 1rem;
-}
-
-.btn{
-  color: rgb(86, 87, 128);
-}
-.btn:hover{
-  background-color: rgb(222, 222, 238);
-}
-.btn_active{
-  color: rgb(187, 188, 243);
-  background-color:rgb(54, 54, 85);
-  border: 3px solid rgb(54, 54, 85);  
-}
-.btn_active:hover{
-  background-color: black;
-  color: white;
-}
-.active span{
-  color: rgb(54, 54, 85);
 }
 h2{
   color: rgb(54, 54, 85);
 }
-
-
-
+.active span{
+  color: rgb(54, 54, 85);
+}
 @media screen and (max-width: 800px) {
    button{
       width: 30%;

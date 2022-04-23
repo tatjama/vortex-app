@@ -1,16 +1,4 @@
 .main{
     height: 100%;
 }
-.main button{
-    padding: 30px 10px;
-}
-@media screen and (max-width:800px) {
-    .main button{
-        padding: 25px 10px;
-    }
-}
-@media screen and (max-width:500px) {
-    .main button{
-        padding: 20px 10px;
-    }
-}
+

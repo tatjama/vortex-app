@@ -1,1 +1,14 @@
-
+.active{
+    color: rgb(187, 188, 243);
+    background-color:rgb(54, 54, 85);
+    border: 3px solid rgb(54, 54, 85);  
+}
+.active:hover{
+    background-color: black;
+    color: white;
+}
+.inactive:hover{
+    background-color: rgb(222, 222, 238);
+    border: 3px solid transparent;
+}
+   

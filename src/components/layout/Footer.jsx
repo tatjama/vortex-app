@@ -6,8 +6,8 @@ const Footer = ({backClickHandler, clickHandler, text}) => {
 
     return (
         <footer className={classes.footer}>
-            <Button clickHandler = {backClickHandler} styleDescription = "btn" text = "Back"><Icon name =" fa-chevron-left"/> </Button>
-            <Button clickHandler = {clickHandler} styleDescription = "btn_active" text = {text}/>
+            <Button clickHandler = {backClickHandler} styleDescription = {undefined} text = "Back"><Icon name =" fa-chevron-left"/> </Button>
+            <Button clickHandler = {clickHandler} styleDescription = "active" text = {text}/>
         </footer>
     )
 }

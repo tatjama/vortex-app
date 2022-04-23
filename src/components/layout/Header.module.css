@@ -7,7 +7,6 @@
 }
 @media screen and (max-width: 800px){
     .header{
-        height: 20vh;
         margin-bottom: 10px;
     }
     .title{

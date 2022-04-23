@@ -5,8 +5,7 @@
     justify-content: flex-end;
 }
 .footer button{
-    padding: 20px 10px;
-  
+    padding: 20px 10px;  
 }
 @media screen and (max-width:800px) {
     .footer{

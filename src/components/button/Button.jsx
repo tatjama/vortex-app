@@ -3,7 +3,7 @@ import classes from './Button.module.css';
 const Button = (props) => {
     return(
         <button 
-            className={props.styleDescription} 
+            className={props.styleDescription === 'active'? classes.active: classes.inactive} 
             onClick = {props.clickHandler}
             id = {props.id}
             >
