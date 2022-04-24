@@ -14,7 +14,7 @@ const AddSubgenre = () => {
     const [ isDescriptionRequired, setIsDescriptionRequired ] = useState(false);
 
     const history = useHistory();
-    const genreCtx = useGenreContext;
+    const genreCtx = useGenreContext();
     
     const handleBackClick = (e) => {
         e.preventDefault();
